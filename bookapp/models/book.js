@@ -15,8 +15,9 @@ const bookSchema = new Schema(
       required: true,
     },
     favorite: {
-      type: String,
+      type: Boolean,
       required: true,
+      default: false
     },
     fileCover: {
       type: String,
@@ -35,3 +36,4 @@ const bookSchema = new Schema(
 );
 
 module.exports = model('Book', bookSchema);
+ 

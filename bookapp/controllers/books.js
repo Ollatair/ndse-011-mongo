@@ -89,6 +89,40 @@ module.exports.renderUpdate =  (req, res) => {
     }); 
 };
 
+// update — редактирование книги
+module.exports.updateBook = (req, res) => {
+  const { id } = req.params;
+  const {
+    title, description, authors, favorite,
+    fileCover, fileName, fileBook
+  } = req.body;
+  const isFavorite = favorite === 'on' || Boolean(favorite);
+  if (req.file) {
+    const { path } = req.file;
+    fileBook = path;
+  }
+  Book.findByIdAndUpdate(id, {
+    title, description, authors, favorite: isFavorite,
+    fileCover, fileName, fileBook
+  }).orFail()
+    .then(() => res.redirect(`/books/${id}`))
+    .catch((e) => {
+        console.log(e);  
+        res.redirect('/404');
+    });
+};
+
+// удалить книгу по **ID**
+module.exports.deleteBook = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Book.findByIdAndDelete(id).orFail();
+    res.redirect('/books');
+  } catch (error) {
+    console.log(error);
+    res.redirect('/404');
+  }
+};
 
 // Добавление defaultList книг
 module.exports.addBooks = async () => {

@@ -1,3 +1,5 @@
+# mongo
+/data
 # redis
 *.rdb
 

@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const bookRouter = require('./routes/book');
@@ -6,6 +7,11 @@ const bookRouter = require('./routes/book');
 const user = require('./routes/api/user');
 const book = require('./routes/api/book');
 const error404 = require('./middleware/err-404');
+
+const bookController = require('./controllers/books');
+
+const PORT = process.env.PORT || 3000; 
+const DB_URL = process.env.DB_URL || "localhost";
 
 const app = express();
 app.use(express.urlencoded());
@@ -19,10 +25,22 @@ app.use('/api/books', book);
 
 app.use(error404);
 
-const PORT = process.env.PORT || 3000;
-const REDIS_URL = process.env.REDIS_URL || "localhost";
 
+async function start() {
+    try {
+        console.log(DB_URL);
+    await mongoose.connect(DB_URL, {
+        useNewUrlParser: true,
+    });
+    bookController.addBooks();
+    app.listen(PORT, () =>{
+        console.log(`Сервер запущен на http://localhost:${PORT}`)
+    });
+     
 
-app.listen(PORT);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-console.log(`Сервер запущен на http://localhost:${PORT}`)
+start();

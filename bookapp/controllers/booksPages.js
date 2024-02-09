@@ -29,7 +29,7 @@ module.exports.renderCreate = (req, res) => {
 module.exports.createBook = (req, res) => {
   const {
     title, description, authors, favorite,
-    fileCover, fileName, fileBook
+    fileCover, fileName
   } = req.body;
   if (req.file) {
     const { path } = req.file;
@@ -94,7 +94,7 @@ module.exports.updateBook = (req, res) => {
   const { id } = req.params;
   const {
     title, description, authors, favorite,
-    fileCover, fileName, fileBook
+    fileCover, fileName
   } = req.body;
   const isFavorite = favorite === 'on' || Boolean(favorite);
   if (req.file) {

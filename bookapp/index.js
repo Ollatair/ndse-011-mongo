@@ -8,7 +8,7 @@ const user = require('./routes/api/user');
 const book = require('./routes/api/book');
 const error404 = require('./middleware/err-404');
 
-const bookController = require('./controllers/books');
+const bookController = require('./controllers/booksPages');
 
 const PORT = process.env.PORT || 3000; 
 const DB_URL = process.env.DB_URL || "localhost";

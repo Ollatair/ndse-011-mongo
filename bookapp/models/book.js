@@ -8,31 +8,30 @@ const bookSchema = new Schema(
     },
     description: {
       type: String,
-      required: true,
+      default: null
     },
     authors: {
       type: String,
-      required: true,
+      default: null
     },
     favorite: {
       type: Boolean,
-      required: true,
       default: false
     },
     fileCover: {
       type: String,
-      required: true,
+      default: null
     },
     fileName: {
       type: String,
-      required: true,
+      default: null
     },
     fileBook: {
       type: String,
-      required: true,
+      default: null
     },
   },
-  { varsionKey: false },
+  { versionKey: false },
 );
 
 module.exports = model('Book', bookSchema);

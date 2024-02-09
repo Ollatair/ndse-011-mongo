@@ -9,7 +9,7 @@ const {
   renderUpdate,
   updateBook,
   deleteBook,
-} = require('../controllers/books');
+} = require('../controllers/booksPages');
 
 router.get('/', renderIndex);
 router.get('/create', renderCreate);
